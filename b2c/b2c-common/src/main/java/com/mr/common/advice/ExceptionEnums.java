@@ -11,8 +11,9 @@ import lombok.NoArgsConstructor;
 public enum ExceptionEnums {
 
     PRICE_IS_NULL(400,"价格不能为空"),
+    CATEGORY_LIST_NOT_FOUNT(401,"参数设置错误"),
 
-    MYSQL_CONCTION_ERROR(500,"mysql连接不上");
+    MYSQL_COGNITION_ERROR(500,"mysql连接不上");
 
     private Integer code;
 
