@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f1fca237-d986-4f69-bf0e-17df7004fe06" name="Default Changelist" comment="" />
+    <list default="true" id="f1fca237-d986-4f69-bf0e-17df7004fe06" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/b2c-common/src/main/java/com/mr/common/utils/CookieUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/b2c-common/src/main/java/com/mr/common/utils/IdWorker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/b2c-common/src/main/java/com/mr/common/utils/JsonUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/b2c-common/src/main/java/com/mr/common/utils/NumberUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/b2c-common/src/main/java/com/mr/common/utils/PageResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-interface/b2c-item-interface.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/b2c.iml" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +24,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -28,14 +41,16 @@
     </option>
   </component>
   <component name="ProjectId" id="1m5QZtQU3mtyPMNoeHlQZAsDQ8d" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/b2c-common/src/main/java/com/mr/common/advice" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/b2c-common/src/main/java/com/mr/common" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -49,6 +64,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\porject\b2c\b2c-common\src\main\java\com\mr\common" />
       <recent name="E:\b2c\b2c-common\src\main\java\com\mr\common\advice" />
     </key>
   </component>
@@ -116,10 +132,22 @@
       <option name="presentableId" value="Default" />
       <updated>1608781030979</updated>
       <workItem from="1608781033864" duration="2395000" />
+      <workItem from="1608791982557" duration="97000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
