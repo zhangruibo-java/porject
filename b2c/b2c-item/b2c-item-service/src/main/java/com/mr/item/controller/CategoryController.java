@@ -6,10 +6,7 @@ import com.mr.item.service.CategoryService;
 import com.mr.pojo.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,5 +28,22 @@ public class CategoryController {
         throw new MrException(ExceptionEnums.CATEGORY_LIST_NOT_FOUNT);
         }
         return ResponseEntity.ok(list);
+    }
+    @PostMapping("insert")
+    public ResponseEntity<String> addUser( @RequestBody Category Category){
+        categoryService.insert(Category);
+        return ResponseEntity.ok("新增成功");
+    }
+    //http://api.b2c.com/api/item/category/deleteCategory1429
+    @DeleteMapping("deleteCategory/{id}")
+    public ResponseEntity<Void> deleteCategory(@PathVariable("id") Long id){
+        categoryService.deleteCategory(id);
+        return ResponseEntity.ok(null);
+    }
+    @PutMapping("updateCategory")
+    public ResponseEntity<String> updateCategory(@RequestBody Category category){
+       categoryService.updateCategory(category);
+        System.out.println(category);
+        return ResponseEntity.ok(null);
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 public class CategoryService {
     @Autowired
     private CategoryMapper categoryMapper;
-   /*
+    /*
      * 根据pid查询数据
      * @param
      * @return*/
@@ -21,5 +21,21 @@ public class CategoryService {
         Category category = new Category();
         category.setParentId(pid);
         return categoryMapper.queryCategoryByPid(category);
+    }
+
+
+    public int insert(Category id) {
+
+        System.out.println(id);
+        return categoryMapper.insert(id);
+    }
+
+    public void deleteCategory(Long id) {
+        categoryMapper.deleteByPrimaryKey(id);
+    }
+
+    public int updateCategory(Category category) {
+
+        return categoryMapper.updateCategory(category);
     }
 }

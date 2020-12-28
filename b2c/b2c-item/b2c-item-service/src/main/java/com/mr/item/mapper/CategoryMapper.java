@@ -1,10 +1,7 @@
 package com.mr.item.mapper;
 
 import com.mr.pojo.Category;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -19,7 +16,13 @@ public interface CategoryMapper extends tk.mybatis.mapper.common.Mapper<Category
             @Result(column = "is_parent" ,property = "isParent"),
             @Result(column = "sort" ,property = "sort")
     })
-    public List<Category> queryCategoryByPid(Category category);
+    List<Category> queryCategoryByPid(Category category);
+
+    int insert(Integer id);
+    @Update("UPDATE tb_category set name = #{name} where id = #{id}")
+    int updateCategory(Category category);
+
+    //@Insert("insert into tb_category(name,parent_id,is_parent,sort) values(#{name},#{parentId},#{isParent},#{sort})")
 
 
 }
