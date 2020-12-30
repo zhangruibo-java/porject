@@ -8,5 +8,6 @@
     <file url="file://$PROJECT_DIR$/b2c-item/b2c-item-interface" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/b2c-item/b2c-item-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/b2c-registry" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/b2c-upload" charset="UTF-8" />
   </component>
 </project>

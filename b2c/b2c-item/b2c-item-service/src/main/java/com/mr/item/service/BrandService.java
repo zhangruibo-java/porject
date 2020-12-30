@@ -5,10 +5,14 @@ import com.github.pagehelper.PageHelper;
 import com.mr.common.utils.PageResult;
 import com.mr.item.mapper.BrandMapper;
 import com.mr.pojo.Brand;
+import com.mr.pojo.Category;
 import org.apache.commons.lang.StringUtils;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
+
+import java.util.List;
 
 @Service
 public class BrandService {
@@ -27,5 +31,20 @@ public class BrandService {
         Page<Brand> list=(Page<Brand>) brandMapper.selectByExample(op);
         //返回分页数据
         return new PageResult<Brand>(list.getTotal(),list.getResult());
+    }
+
+    public void addBrand(Brand brand,  String cids) {
+        //品牌表
+        brandMapper.insert(brand);
+        //品牌 分类 关系表
+        String[] arrCid = cids.split(",");
+        for (String i : arrCid){
+            brandMapper.insertBrand(brand.getId(),Long.valueOf(i));
+        }
+
+    }
+
+    public List<Category> queryCateBrand(Long bid) {
+      return    brandMapper.queryCateBrand(bid);
     }
 }

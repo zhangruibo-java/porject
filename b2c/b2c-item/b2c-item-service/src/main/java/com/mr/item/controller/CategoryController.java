@@ -23,7 +23,7 @@ public class CategoryController {
     @GetMapping("list")
     public ResponseEntity<List<Category>> list(@RequestParam("pid") Long pid){
        List<Category> list = categoryService.queryCategoryByPid(pid);
-        System.out.println("5555555555555555555555");
+
         if(list.size() == 0){
         throw new MrException(ExceptionEnums.CATEGORY_LIST_NOT_FOUNT);
         }

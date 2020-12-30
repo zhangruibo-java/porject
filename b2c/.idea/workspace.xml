@@ -2,16 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f1fca237-d986-4f69-bf0e-17df7004fe06" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-interface/src/main/java/com/mr/pojo/Brand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/controller/BrandController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/mapper/BrandMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/service/BrandService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/zhangbo.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/b2c-upload/b2c-upload.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/b2c-upload/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/b2c-upload/src/main/java/com/mr/UploadApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/b2c-upload/src/main/java/com/mr/controller/UploadController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/b2c-upload/src/main/java/com/mr/service/UploadService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/b2c-upload/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-interface/src/main/java/com/mr/pojo/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-interface/src/main/java/com/mr/pojo/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/b2c-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/b2c-gateway/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-gateway/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/controller/BrandController.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/controller/BrandController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/controller/CategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/mapper/CategoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/mapper/CategoryMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/service/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/mapper/BrandMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/mapper/BrandMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/service/BrandService.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/service/BrandService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,10 +66,11 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -116,9 +124,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="UploadApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="b2c-upload" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mr.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.mr.UploadApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.GatewayApplication" />
+        <item itemvalue="Spring Boot.UploadApplication" />
         <item itemvalue="Spring Boot.RegistryApplication" />
       </list>
     </recent_temporary>
@@ -138,7 +160,9 @@
       <workItem from="1608861704977" duration="13222000" />
       <workItem from="1608886805709" duration="8318000" />
       <workItem from="1608944969659" duration="2059000" />
-      <workItem from="1609124377877" duration="8294000" />
+      <workItem from="1609124377877" duration="9848000" />
+      <workItem from="1609200963155" duration="20608000" />
+      <workItem from="1609294636571" duration="2237000" />
     </task>
     <task id="LOCAL-00001" summary="更新了工具类">
       <created>1608792111343</created>
@@ -154,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608812982278</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="品牌管理 one">
+      <created>1609148963759</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1609148963759</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -176,6 +207,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="更新了工具类" />
     <MESSAGE value="覆盖" />
-    <option name="LAST_COMMIT_MESSAGE" value="覆盖" />
+    <MESSAGE value="品牌管理 one" />
+    <option name="LAST_COMMIT_MESSAGE" value="品牌管理 one" />
   </component>
 </project>
