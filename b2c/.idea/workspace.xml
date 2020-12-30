@@ -2,23 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f1fca237-d986-4f69-bf0e-17df7004fe06" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/zhangbo.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-upload/b2c-upload.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-upload/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-upload/src/main/java/com/mr/UploadApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-upload/src/main/java/com/mr/controller/UploadController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-upload/src/main/java/com/mr/service/UploadService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-upload/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/b2c-upload/src/main/java/com/mr/config/GlobalCorsConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/b2c-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-gateway/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/b2c-gateway/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-gateway/target/classes/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/controller/BrandController.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/controller/BrandController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/controller/CategoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/mapper/BrandMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/mapper/BrandMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/service/BrandService.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/service/BrandService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -73,6 +63,9 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.mr.config" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\porject\b2c\b2c-common\src\main\java\com\mr\common" />
       <recent name="E:\b2c\b2c-common\src\main\java\com\mr\common\advice" />
@@ -162,7 +155,8 @@
       <workItem from="1608944969659" duration="2059000" />
       <workItem from="1609124377877" duration="9848000" />
       <workItem from="1609200963155" duration="20608000" />
-      <workItem from="1609294636571" duration="2237000" />
+      <workItem from="1609294636571" duration="2785000" />
+      <workItem from="1609309419295" duration="5712000" />
     </task>
     <task id="LOCAL-00001" summary="更新了工具类">
       <created>1608792111343</created>
@@ -185,7 +179,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609148963759</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="品牌管理 two">
+      <created>1609299597582</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1609299597583</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,6 +209,7 @@
     <MESSAGE value="更新了工具类" />
     <MESSAGE value="覆盖" />
     <MESSAGE value="品牌管理 one" />
-    <option name="LAST_COMMIT_MESSAGE" value="品牌管理 one" />
+    <MESSAGE value="品牌管理 two" />
+    <option name="LAST_COMMIT_MESSAGE" value="品牌管理 two" />
   </component>
 </project>

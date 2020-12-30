@@ -10,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class BrandService {
         //返回分页数据
         return new PageResult<Brand>(list.getTotal(),list.getResult());
     }
-
+    @Transactional
     public void addBrand(Brand brand,  String cids) {
         //品牌表
         brandMapper.insert(brand);
@@ -46,5 +47,17 @@ public class BrandService {
 
     public List<Category> queryCateBrand(Long bid) {
       return    brandMapper.queryCateBrand(bid);
+    }
+    @Transactional
+    public void updateBrand(Brand brand, String bids) {
+        //修改品牌表
+        brandMapper.updateBrand(brand);
+        //  删除所有的关系
+        brandMapper.deleteBrand(brand.getId());
+        //重新增加所有的关系
+        String[] arrCid = bids.split(",");
+        for (String i : arrCid){
+            brandMapper.insertBrand(brand.getId(),Long.valueOf(i));
+        }
     }
 }

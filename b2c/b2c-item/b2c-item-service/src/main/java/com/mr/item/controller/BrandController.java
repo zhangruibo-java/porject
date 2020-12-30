@@ -33,10 +33,16 @@ public class BrandController {
         brandService.addBrand(brand,cids);
         return ResponseEntity.status(201).body(null);
     }
+    //根据品牌 查询分类
     @GetMapping("queryCateBrand/{bid}")
     public ResponseEntity<List<Category>> queryCateBrand(@PathVariable("bid") Long bid){
       List<Category> list=  brandService.queryCateBrand(bid);
         return ResponseEntity.ok(list);
+    }
+    @PutMapping("updateBrand")
+    public ResponseEntity<Void> updateBrand(Brand brand, String cids){
+        brandService.updateBrand(brand,cids);
+        return  ResponseEntity.ok(null);
     }
 
 }
