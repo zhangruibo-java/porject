@@ -33,6 +33,8 @@ public interface BrandMapper extends tk.mybatis.mapper.common.Mapper<Brand>{
 
     @Delete("DELETE FROM tb_category_brand where brand_id=#{bid}")
     void deleteBrand(Long bid);
+    @Select("SELECT * from tb_brand where id in(SELECT brand_id from tb_category_brand where category_id=#{cid})")
+    List<Brand> queryBrandByCategory(Long cid);
 
 /*
     @Insert("insert into tb_brand(name,letter) values(#{name},#{letter})")

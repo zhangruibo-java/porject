@@ -46,7 +46,8 @@ public class BrandService {
     }
 
     public List<Category> queryCateBrand(Long bid) {
-      return    brandMapper.queryCateBrand(bid);
+
+        return    brandMapper.queryCateBrand(bid);
     }
     @Transactional
     public void updateBrand(Brand brand, String bids) {
@@ -59,5 +60,13 @@ public class BrandService {
         for (String i : arrCid){
             brandMapper.insertBrand(brand.getId(),Long.valueOf(i));
         }
+    }
+
+    public List<Brand> queryBrandByCategory(Long cid) {
+        return this.brandMapper.queryBrandByCategory(cid);
+    }
+
+    public Brand queryBidById(Long bid) {
+        return brandMapper.selectByPrimaryKey(bid);
     }
 }

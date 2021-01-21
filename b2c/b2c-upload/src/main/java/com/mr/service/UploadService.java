@@ -1,5 +1,9 @@
 package com.mr.service;
 
+import com.github.tobato.fastdfs.domain.StorePath;
+import com.github.tobato.fastdfs.service.FastFileStorageClient;
+import com.mr.config.FastClientImporter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,55 +22,54 @@ import java.util.UUID;
 public class UploadService {
 
 
-    /*
-     *1 验证是否是图片
-     *   1.1 验证后缀名 peg jpg ....
-     *   1.2 验证内容 是否可以打开
-     *   1.3 验证图片的宽高
-     *2 验证完成 存储到硬盘 file.transferTo(); 硬盘(io 多,大的时候寿命会缩短)
-     *   2.1 是否备份
-     *   2.2 是否分布式
-     *3 返回路径(url形式 可以直接在页面展示)
-     *   3.1tomcat(应用服务器(动态,并发不高)) web服务器(nginx )
-     * */
-    private static Map<String,Boolean> allowSuffix;
-    /*静态块 可以初始化加载*/
-    static{
-        allowSuffix =new HashMap<>();
-        allowSuffix.put("png",true);
-        allowSuffix.put("jpg",true);
-        allowSuffix.put("gip",true);
-        allowSuffix.put("bmp",true);
+    private static Map <String,Boolean> allowsuffix;
+    //静态块 可以初始化加载
+    static {
+        allowsuffix=new HashMap<>();
+        allowsuffix.put("jpg",true);
+        allowsuffix.put("jfif",true);
+        allowsuffix.put("png",true);
+        allowsuffix.put("gif",true);
     }
+    //注入客户端类
+    @Autowired
+    private FastFileStorageClient storageClient;
 
-    public String uploadImg(MultipartFile file) {
-
-        String[] hzArr = file.getOriginalFilename().split("\\.");
-        String suffix = hzArr[hzArr.length - 1];
+    public String uploadImg(MultipartFile file){
         System.out.println(file.getOriginalFilename());
-      // 1.1 验证后缀名 peg jpg ....
-        if (allowSuffix.get(suffix)==null) {
+        String[] hzArr=file.getOriginalFilename().split("\\.");
+        String suffix=hzArr[hzArr.length-1];
+        if(allowsuffix.get(suffix)==null){
             System.out.println("文件后缀不对");
         }
-        //1.2 验证内容 是否可以打开
-            if (!this.validImg(file)){
-                System.out.println("文件内容不对");
-            }
-            String newFileName = UUID.randomUUID().toString()+"."+suffix;
-            //图片 保存 地址
-        File img = new File("E:\\mr\\img\\"+newFileName);
-        try{
-            //保存
+        if(!this.validImg(file)){
+            System.out.println("文件不支持上传");
+        }
+
+        /*String nweFileName= UUID.randomUUID().toString()+"."+suffix;
+        File img=new File("E:\\img\\"+nweFileName);
+        try {
             file.transferTo(img);
-        }catch (IOException e){
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        StorePath storePath = null;
+        try {
+            // storePath = storageClient.uploadFile(file.getInputStream(),file.getSize(),hz,null);
+            storePath = storageClient.uploadImageAndCrtThumbImage(file.getInputStream(),file.getSize(),suffix,null);//存储的是缩略图
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        //返回路径(url形式 可以直接在页面展示)
+        System.out.println(storePath.getGroup());
+        System.out.println(storePath.getPath());
+        System.out.println(storePath.getFullPath());
 
-    return "http://img.b2c.com/"+newFileName;
+
+
+        return "http://image.b2c.com/"+storePath.getFullPath();
     }
 
-    public  boolean validImg(MultipartFile file){
+    public boolean validImg(MultipartFile file){
         int len = 10;
         BufferedInputStream imgFile = null;
         try {
@@ -74,9 +77,9 @@ public class UploadService {
             Image img;
             try {
                 img = ImageIO.read(imgFile);
-              return !(img == null || img.getWidth(null) <= 0 || img.getHeight(null) <= 0);
+                System.out.println("解析结果"+!(img == null || img.getWidth(null) <= 0 || img.getHeight(null) <= 0));
             } catch (Exception e) {
-                System.out.println("cache");
+                System.out.println("判断失败");
             }
         } catch (IOException e) {
             e.printStackTrace();

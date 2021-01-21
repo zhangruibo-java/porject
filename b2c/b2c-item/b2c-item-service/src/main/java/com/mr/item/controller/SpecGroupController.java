@@ -1,3 +1,4 @@
+
 package com.mr.item.controller;
 
 import com.mr.item.service.SpecGroupService;
@@ -40,8 +41,10 @@ public class SpecGroupController {
     }
 
     @GetMapping("/params")
-    public ResponseEntity<List<SpecParam>> params(@RequestParam("gid") Long gid){
-        List<SpecParam> list = specGroupService.querySpecBygid(gid);
+    public ResponseEntity<List<SpecParam>> params(
+            @RequestParam("cid") Long cid,
+            @RequestParam("searching") boolean searching){
+        List<SpecParam> list = specGroupService.querySpecBygid(cid,searching);
         return ResponseEntity.ok(list);
     }
 
@@ -63,4 +66,16 @@ public class SpecGroupController {
         return ResponseEntity.ok(null);
     }
 
+//    @GetMapping("/params")
+//    public ResponseEntity<List<SpecParam>> querySpecByParamCid(@RequestParam("cid") Long cid){
+//        List<SpecParam> list = specGroupService.querySpecByParamCid(cid);
+//        return ResponseEntity.ok(list);
+//    }
+
+    @GetMapping("query")
+    public ResponseEntity<List<SpecParam>> querySpecByParamCid(@RequestParam("cid") Long cid){
+        List<SpecParam> list = specGroupService.querySpecByParamCid(cid);
+        return ResponseEntity.ok(list);
+    }
 }
+

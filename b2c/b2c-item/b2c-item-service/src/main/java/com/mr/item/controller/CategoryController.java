@@ -46,4 +46,10 @@ public class CategoryController {
         System.out.println(category);
         return ResponseEntity.ok(null);
     }
+    @GetMapping("queryCategoryList")
+    public  ResponseEntity<List<Category>> queryCategoryList(
+            @RequestParam List<Long>  cids){
+        List<Category> list = categoryService.queryCateboryList(cids);
+        return ResponseEntity.ok(list);
+    }
 }

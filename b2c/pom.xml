@@ -14,6 +14,7 @@
         <module>b2c-item</module>
         <module>b2c-common</module>
         <module>b2c-upload</module>
+        <module>b2c-search</module>
     </modules>
     <packaging>pom</packaging>
     <parent>

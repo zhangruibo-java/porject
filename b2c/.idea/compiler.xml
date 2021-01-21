@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="b2c-search" />
         <module name="b2c-upload" />
         <module name="b2c-item-service" />
         <module name="b2c-registry" />
@@ -24,6 +25,7 @@
       <module name="b2c-item-interface" options="-parameters" />
       <module name="b2c-item-service" options="-parameters" />
       <module name="b2c-registry" options="-parameters" />
+      <module name="b2c-search" options="-parameters" />
       <module name="b2c-upload" options="-parameters" />
     </option>
   </component>

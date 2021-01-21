@@ -13,7 +13,7 @@ public class SpecGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long cid;
     private String name;
+    private Long cid;
     // getter setter 略
 }

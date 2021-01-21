@@ -11,6 +11,9 @@ import java.util.List;
 public class CategoryService {
     @Autowired
     private CategoryMapper categoryMapper;
+
+    @Autowired
+    private GoodsService goodsService;
     /*
      * 根据pid查询数据
      * @param
@@ -37,5 +40,14 @@ public class CategoryService {
     public int updateCategory(Category category) {
 
         return categoryMapper.updateCategory(category);
+    }
+
+
+    public List<String> queryNameByIds(List<Long> asList) {
+        return categoryMapper.queryNameByIds(asList);
+    }
+
+    public List<Category> queryCateboryList(List<Long> cids) {
+        return categoryMapper.selectByIdList(cids);
     }
 }

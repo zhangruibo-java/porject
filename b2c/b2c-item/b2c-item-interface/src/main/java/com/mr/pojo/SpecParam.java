@@ -2,10 +2,7 @@ package com.mr.pojo;
 
 import lombok.Data;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Table(name = "tb_spec_param")
@@ -16,10 +13,10 @@ public class SpecParam {
     private Long cid;
     private Long groupId;
     private String name;
+    @Column(name = "`numeric`")
     private Boolean numeric;
-    private Boolean unit;
+    private String unit;
     private Boolean generic;
     private Boolean searching;
     private String segments;
-    // getter setter 略
 }
