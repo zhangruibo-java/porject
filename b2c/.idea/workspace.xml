@@ -2,66 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f1fca237-d986-4f69-bf0e-17df7004fe06" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-interface/src/main/java/com/mr/api/BrandApi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-interface/src/main/java/com/mr/api/CategoryApi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-interface/src/main/java/com/mr/api/GoodsApi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-interface/src/main/java/com/mr/api/SpecApi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-interface/src/main/java/com/mr/bo/SpuBo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-interface/src/main/java/com/mr/pojo/Sku.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-interface/src/main/java/com/mr/pojo/Spu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-interface/src/main/java/com/mr/pojo/SpuDetail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-interface/src/main/java/com/mr/pojo/Stock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/controller/GoodsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/mapper/GoodsMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/mapper/SkuMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/mapper/SpecGroupMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/mapper/SpuDetailMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/mapper/SpuMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/mapper/StockMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/service/GoodsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-search/b2c-search.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-search/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-search/src/main/java/com/mr/SearchApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-search/src/main/java/com/mr/bo/SearchBo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-search/src/main/java/com/mr/bo/SearchResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-search/src/main/java/com/mr/client/BrandClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-search/src/main/java/com/mr/client/CategoryClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-search/src/main/java/com/mr/client/GoodClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-search/src/main/java/com/mr/client/SpecClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-search/src/main/java/com/mr/controller/GoodController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-search/src/main/java/com/mr/dao/GoodRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-search/src/main/java/com/mr/pojo/Goods.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-search/src/main/java/com/mr/service/GoodService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-search/src/main/java/com/mr/util/HighLightUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-search/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-search/src/test/java/com/test/SearchTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/b2c-upload/src/main/java/com/mr/config/FastClientImporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-gateway/src/main/java/com/mr/config/GlobalCorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-gateway/src/main/java/com/mr/config/GlobalCorsConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-gateway/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-gateway/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-gateway/target/classes/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-interface/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-interface/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-interface/src/main/java/com/mr/pojo/Brand.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-interface/src/main/java/com/mr/pojo/Brand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-interface/src/main/java/com/mr/pojo/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-interface/src/main/java/com/mr/pojo/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-interface/src/main/java/com/mr/pojo/SpecGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-interface/src/main/java/com/mr/pojo/SpecGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-interface/src/main/java/com/mr/pojo/SpecParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-interface/src/main/java/com/mr/pojo/SpecParam.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/controller/BrandController.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/controller/BrandController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/controller/CategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/controller/SpecGroupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/controller/SpecGroupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/mapper/BrandMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/mapper/BrandMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/mapper/CategoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/mapper/CategoryMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/mapper/SpecParamMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/mapper/SpecParamMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/service/BrandService.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/service/BrandService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/service/CategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/service/SpecGroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-item/b2c-item-service/src/main/java/com/mr/item/service/SpecGroupService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-upload/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-upload/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-upload/src/main/java/com/mr/config/GlobalCorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-upload/src/main/java/com/mr/config/GlobalCorsConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-upload/src/main/java/com/mr/service/UploadService.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-upload/src/main/java/com/mr/service/UploadService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/b2c-upload/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-upload/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/b2c-search/src/main/java/com/mr/bo/SearchBo.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-search/src/main/java/com/mr/bo/SearchBo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/b2c-search/src/main/java/com/mr/bo/SearchResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-search/src/main/java/com/mr/bo/SearchResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/b2c-search/src/main/java/com/mr/service/GoodService.java" beforeDir="false" afterPath="$PROJECT_DIR$/b2c-search/src/main/java/com/mr/service/GoodService.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -258,8 +202,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.RegistryApplication" />
         <item itemvalue="Spring Boot.UploadApplication" />
+        <item itemvalue="Spring Boot.RegistryApplication" />
         <item itemvalue="JUnit.SearchTest.searchSave2" />
         <item itemvalue="JUnit.SearchTest.searchSave" />
         <item itemvalue="JUnit.SearchTest.searchTest" />
@@ -301,7 +245,9 @@
       <workItem from="1611014071739" duration="21027000" />
       <workItem from="1611102464543" duration="11008000" />
       <workItem from="1611146095112" duration="6837000" />
-      <workItem from="1611185452629" duration="6554000" />
+      <workItem from="1611185452629" duration="10412000" />
+      <workItem from="1611273794419" duration="9003000" />
+      <workItem from="1611301665289" duration="8245000" />
     </task>
     <task id="LOCAL-00001" summary="更新了工具类">
       <created>1608792111343</created>
@@ -345,7 +291,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609724207387</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="品牌管理 two+3">
+      <created>1611204624153</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1611204624153</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -371,7 +324,8 @@
     <MESSAGE value="品牌管理 two" />
     <MESSAGE value="品牌管理 two+1" />
     <MESSAGE value="品牌管理 two+2" />
-    <option name="LAST_COMMIT_MESSAGE" value="品牌管理 two+2" />
+    <MESSAGE value="品牌管理 two+3" />
+    <option name="LAST_COMMIT_MESSAGE" value="品牌管理 two+3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

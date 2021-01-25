@@ -1,7 +1,10 @@
 package com.mr.service;
 
+
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.mr.bo.SearchBo;
+import com.mr.bo.SearchResult;
 import com.mr.client.BrandClient;
 import com.mr.client.CategoryClient;
 import com.mr.client.GoodClient;
@@ -11,17 +14,19 @@ import com.mr.common.utils.PageResult;
 import com.mr.dao.GoodRepository;
 import com.mr.pojo.*;
 import com.mr.util.HighLightUtil;
-import io.netty.util.internal.StringUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.bucket.terms.LongTerms;
+import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 
@@ -128,6 +133,201 @@ public class GoodService {
 
        return goods;
     }
+
+    /**
+     * 查询
+     * @param searchBo
+     * @return
+     */
+    public PageResult<Goods> searchGood(SearchBo searchBo) {
+//执行查询
+        //构造查询条件
+        NativeSearchQueryBuilder builder = new NativeSearchQueryBuilder();
+       //==================================查询商品======================================
+        if(StringUtils.isNotEmpty(searchBo.getKey())){//判断查询条件是否为空
+            builder.withQuery(
+                    QueryBuilders.matchQuery("all",searchBo.getKey())
+            );
+        }
+        //判断是否有过滤条件
+        Map<String,String> filterMap = searchBo.getFilter();
+       if( filterMap!=null &&  filterMap.size()!=0){
+
+           //拼接过滤条件,循环map
+           Set<String> filterKey= filterMap.keySet();
+           //创建boll查询 ,方便循环内拼接
+           BoolQueryBuilder boolQueryBuilder =QueryBuilders.boolQuery();
+           //循环所有的sku
+
+           filterKey.forEach(key->{
+               //增加过滤条件 key? cpu cid3 ....  value? 小龙 76...
+               if(key.equals("cid3") || key.equals("brandId")){
+                   boolQueryBuilder.must(QueryBuilders.termQuery(key,filterMap.get(key)));
+               }else{
+                   boolQueryBuilder.must(QueryBuilders.termQuery("specs."+key+".keyword",filterMap.get(key)));
+               }
+           });
+           builder.withFilter(boolQueryBuilder);
+       }
+        //设置分页
+        builder.withPageable(PageRequest.of(searchBo.getPage(),searchBo.getSize()));
+        //查询
+       Page<Goods> goodsPage= goodRepository.search(builder.build());
+       //设置高亮关键字
+        builder.withHighlightFields(new HighlightBuilder.Field("all")
+                .preTags("<font color='red'>")
+                .postTags("</font>"));
+       Map<Long,String> hignMap= HighLightUtil.getHignLigntMap(elasticsearchTemplate,builder.build(),Goods.class,"all");
+        goodsPage.getContent().forEach(goods -> {
+            //高亮字段替换
+            goods.setAll(hignMap.get(goods.getId()));
+        });
+        //==================================查询商品======================================
+
+        //==================================查询规格======================================
+        //汇总所有商品下的分类规格
+        builder.addAggregation(AggregationBuilders.terms("cate_gro").field("cid3"));
+        //汇总所有商品下的品牌
+        builder.addAggregation(AggregationBuilders.terms("brand_gro").field("brandId"));
+        //查询得到聚合结果
+        AggregatedPage<Goods> aggPage= (AggregatedPage<Goods>) goodRepository.search(builder.build());
+        //获得分类结果
+        LongTerms cateTerms= (LongTerms) aggPage.getAggregation("cate_gro");
+        //获得聚合后的"桶" 数据
+
+        List<LongTerms.Bucket> cateBuckets =cateTerms.getBuckets();
+        /*cateBuckets.forEach(bucket -> {
+            System.out.println("聚合后的分类数据"+bucket.getKeyAsNumber().longValue());
+        });*/
+        //获得分类集合
+        List<Long> cateIds= cateBuckets.stream().map(bucket -> {
+            return bucket.getKeyAsNumber().longValue();
+        }).collect(Collectors.toList());
+        //批量查询分类
+        List<Category> categoryList= categoryClient.queryCategoryList(cateIds);
+
+
+        //获得品牌聚合结果
+        LongTerms brandTerms= (LongTerms) aggPage.getAggregation("brand_gro");
+        //获得聚合后的"桶" 数据
+        List<LongTerms.Bucket> brandBucket =brandTerms.getBuckets();
+        //根据id查询出品牌详情
+       /* brandBucket.forEach(bucket -> {
+            System.out.println("聚合后的品牌数据"+bucket.getKeyAsNumber().longValue());
+        });*/
+       //根据id查询品牌数据
+        //的到品牌集合
+       List<Brand> brandList= brandBucket.stream().map(bucket -> {
+          return  brandClient.queryBidById(bucket.getKeyAsNumber().longValue());
+        }).collect(Collectors.toList());
+
+       //汇总出热度最高的分类
+        long maxDoc = 0;
+        long maxCid = 0;
+
+        for (LongTerms.Bucket  bucket : cateBuckets) {
+            if(bucket.getDocCount() > maxDoc){
+                maxDoc=bucket.getDocCount();
+                maxCid=bucket.getKeyAsNumber().longValue();
+            }
+        }
+        System.out.println("商品最多的分类是"+maxDoc);
+        //根据分类查询出该分类下的查询规格
+        //封装一个方法,查询规格从mysql 查询规格值 从es
+        List<Map<String ,Object>> specMapList=getSpecMapList(maxCid,searchBo);
+        //==================================查询规格======================================
+
+
+        //分页数据
+        SearchResult<Goods> pageResult = new SearchResult<>();
+        pageResult.setTotal(goodsPage.getTotalElements());//总条数
+        long total =goodsPage.getTotalElements();
+        long size = searchBo.getSize();
+        pageResult.setTotalPage(total % size == 0 ? total/size : total/size+1);//总页数
+        //pageResult.setTotalPage((long)goodsPage.getTotalPages());
+        pageResult.setItems(goodsPage.getContent());//当前页数据
+        //将分类品牌集合设置到返回集合中
+        pageResult.setBrandList(brandList);
+        pageResult.setCategoryList(categoryList);
+        //设置规格查询条件
+        pageResult.setSpecMapList(specMapList);
+       return pageResult;
+    }
+
+    /**
+     * 返回组装好的规格参数
+     * @param maxCid
+     * @param searchBo
+     * @return
+     */
+    private List<Map<String, Object>> getSpecMapList(long maxCid, SearchBo searchBo) {
+        List<Map<String, Object>> specMapList= new ArrayList<>();
+
+        //1查询规格名称
+        List<SpecParam> specParamList=specClient.params(maxCid,true);
+        //从es 查询规格的值
+        NativeSearchQueryBuilder builder = new NativeSearchQueryBuilder();
+
+        //创建boll查询 ,方便循环内拼接
+        BoolQueryBuilder boolQueryBuilder =QueryBuilders.boolQuery();
+
+        //设置过滤条件
+        Map<String,String> filterMap = searchBo.getFilter();
+        //判断是否有过滤条件
+        if( filterMap!=null &&  filterMap.size()!=0){
+            System.out.println("设置规格中条件过滤");
+            //拼接过滤条件,循环map
+            Set<String> filterKey= filterMap.keySet();
+
+            //循环所有的sku
+            filterKey.forEach(key->{
+                //增加过滤条件 key? cpu cid3 ....  value? 小龙 76...
+                if(key.equals("cid3") || key.equals("brandId")){
+                    boolQueryBuilder.must(QueryBuilders.termQuery(key,filterMap.get(key)));
+                }else{
+                    boolQueryBuilder.must(QueryBuilders.termQuery("specs."+key+".keyword",filterMap.get(key)));
+                }
+            });
+            //聚合会在过滤之后执行吗?
+          //  builder.withFilter(boolQueryBuilder);
+        }
+        //设置关键字
+        if(StringUtils.isNotEmpty(searchBo.getKey())){
+            boolQueryBuilder.must(QueryBuilders.matchQuery("all",searchBo.getKey()));
+            builder.withQuery(boolQueryBuilder);
+        }
+        //聚合规格的值
+        //循环 加入 聚合条件
+        specParamList.forEach(specParam -> {
+            //规格名称
+            String key = specParam.getName();
+            builder.addAggregation(AggregationBuilders.terms(key).field("specs."+key+".keyword"));
+
+        });
+        //值进行查询,得到聚合结果
+        AggregatedPage<Goods>  goodsPage= (AggregatedPage<Goods>) goodRepository.search(builder.build());
+        specParamList.forEach(specParam -> {
+            //组装map放入集合
+            String key = specParam.getName();
+         //规格名称作为key
+            Map<String,Object> map=new HashMap<>();
+            map.put("key",key);
+            //聚合出的值作为value
+
+            StringTerms stringTerms= (StringTerms) goodsPage.getAggregation(specParam.getName());
+            //取出数据
+            List<StringTerms.Bucket> bucketList = stringTerms.getBuckets();
+            //转为 集合string类型
+           List<String> values= bucketList.stream().map(bucket -> {
+                return bucket.getKeyAsString();
+            }).collect(Collectors.toList());
+           map.put("values",values);
+           //将map放入集合
+            specMapList.add(map);
+        });
+        return  specMapList;
+    }
+
     private String chooseSegment(String value, SpecParam p) {
         double val = NumberUtils.toDouble(value);
         String result = "其它";
@@ -155,43 +355,4 @@ public class GoodService {
         return result;
     }
 
-    /**
-     * 查询
-     * @param searchBo
-     * @return
-     */
-    public PageResult<Goods> searchGood(SearchBo searchBo) {
-//执行查询
-        //构造查询条件
-        NativeSearchQueryBuilder builder = new NativeSearchQueryBuilder();
-        if(StringUtils.isNotEmpty(searchBo.getKey())){//判断查询条件是否为空
-            builder.withQuery(
-                    QueryBuilders.matchQuery("all",searchBo.getKey())
-            );
-        }
-        //设置分页
-        builder.withPageable(PageRequest.of(searchBo.getPage(),searchBo.getSize()));
-
-        //查询
-       Page<Goods> goodsPage= goodRepository.search(builder.build());
-       //设置高亮关键字
-        builder.withHighlightFields(new HighlightBuilder.Field("all")
-                .preTags("<font color='red'>")
-                .postTags("</font>"));
-       Map<Long,String> hignMap= HighLightUtil.getHignLigntMap(elasticsearchTemplate,builder.build(),Goods.class,"all");
-        goodsPage.getContent().forEach(goods -> {
-            //高亮字段替换
-            goods.setAll(hignMap.get(goods.getId()));
-        });
-        //分页数据
-        PageResult<Goods> pageResult = new PageResult<>();
-        pageResult.setTotal(goodsPage.getTotalElements());//总条数
-        long total =goodsPage.getTotalElements();
-        long size = searchBo.getSize();
-        pageResult.setTotalPage(total % size == 0 ? total/size : total/size+1);//总页数
-        //pageResult.setTotalPage((long)goodsPage.getTotalPages());
-        pageResult.setItems(goodsPage.getContent());//当前页数据
-
-       return pageResult;
-    }
 }
