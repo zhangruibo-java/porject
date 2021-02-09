@@ -38,14 +38,14 @@ public class SpecGroupService {
         specGroupMapper.deleteGroup(gid);
     }
 
-    public List<SpecParam> querySpecBygid(Long cid,Boolean searching) {
-        //  return specGroupMapper.querySpecBygid(cid);
-        SpecParam specParam = new SpecParam();
-        specParam.setSearching(searching);
-        specParam.setCid(cid);
-
-
-        return specParamMapper.select(specParam);
+     public List<SpecParam> querySpecParams(Long gid,Long cid, Boolean searching, Boolean generic) {
+        SpecParam param = new SpecParam();
+        param.setGroupId(gid);
+        param.setCid(cid);
+        param.setSearching(searching);
+        param.setGeneric(generic);
+        //根据实体类当中属性，哪个不为null就查询哪个
+        return this.specParamMapper.select(param);
     }
 
     public void addParam(SpecParam specParam) {
@@ -60,11 +60,21 @@ public class SpecGroupService {
         specGroupMapper.deleteParam(id);
     }
 
-    public List<SpecParam> querySpecByParamCid(Long cid) {
 
-        /* return  specParamMapper.querySpecByParamCid(cid);*/
-        return (List<SpecParam>) specParamMapper.selectByPrimaryKey(cid);
+    public List<SpecParam> querySpecBygid(Long cid,Boolean searching) {
+        //  return specGroupMapper.querySpecBygid(cid);
+        SpecParam specParam = new SpecParam();
+        specParam.setSearching(searching);
+        specParam.setCid(cid);
+
+
+        return specParamMapper.select(specParam);
     }
 
+    public List<SpecParam> querySpecByParamCid(Long cid) {
+
+        return  specParamMapper.querySpecByParamCid(cid);
+       // return (List<SpecParam>) specParamMapper.selectByPrimaryKey(cid);
+    }
 
 }

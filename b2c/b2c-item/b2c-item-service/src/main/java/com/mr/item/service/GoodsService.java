@@ -3,11 +3,13 @@ package com.mr.item.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.mr.bo.SpuBo;
+import com.mr.common.constant.MessageConstant;
 import com.mr.common.utils.PageResult;
 import com.mr.item.mapper.*;
 import com.mr.pojo.*;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.annotations.Insert;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +42,9 @@ public class GoodsService {
 
     @Autowired
     private StockMapper stockMapper;
+
+    @Autowired
+    private AmqpTemplate amqptTemplate;
 
     /**
      * 商品分页数据
@@ -104,7 +109,7 @@ public class GoodsService {
         return new PageResult<SpuBo>(pageResult.getTotal(), spuBoList);
     }
     @Transactional//事务
-    public void addGoods(SpuBo spuBo) {
+    public Long addGoods(SpuBo spuBo) {
         System.out.println("111111111111");
 
         //----------------------以下是 保存 spu 数据---------------------------
@@ -142,6 +147,21 @@ public class GoodsService {
             // stockMapper.add(stock);
         });
         System.out.println(spu);
+        return spu.getId();
+        //在这个地方去通知 搜索服务 静态页服务，去增加商品的数据
+    //  this.sendSaveMessage(spu.getId());
+
+    }
+    public void sendSaveMessage(Long spuId){
+        //amqpTemp.send
+        //采用交换机的direct + routing
+        //发送光博，指定新增的rountingkey 参数是 spu的id
+        //交换机和routingKey不能写死 需要统一规定
+        amqptTemplate.convertAndSend(MessageConstant.ITEM_SPU_EXCHANGE,MessageConstant.SPU_ROUTINGKEY_SAVE,spuId.toString());
+       // amqptTemplate.convertAndSend(MessageConstant.ITEM_SPU_EXCHANGE,MessageConstant.SPU_ROUTINGKEY_SAVE,spuId);
+        //发消息应该单独开一个service方法？为什么？
+         //1。代码的复用性
+        //2。事务
     }
 
     public SpuDetail queryDetail(Long spuId) {

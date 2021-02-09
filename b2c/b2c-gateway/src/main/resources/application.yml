@@ -18,8 +18,14 @@ zuul:
   routes:
     item-service: /item/** # 将商品微服务映射到/item/** upload-service
     search-service: /search/**
+    user-service: /user/**
+    auth-service: /auth/**
   ignored-services: upload-service #忽略服务
   ignored-patterns: /upload/** #忽略路径
+  add-host-header: true #添加host域信息 到头信息内
+  sensitive-headers:    #set-cookie 被默认禁止了，设置为null的意思就是不禁止
+
+
 
 ribbon:
   ConnectTimeout: 250 # 连接超时时间(ms)

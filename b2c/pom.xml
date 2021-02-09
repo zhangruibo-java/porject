@@ -15,6 +15,9 @@
         <module>b2c-common</module>
         <module>b2c-upload</module>
         <module>b2c-search</module>
+        <module>b2c-good-page</module>
+        <module>b2c-user</module>
+        <module>b2c-auth</module>
     </modules>
     <packaging>pom</packaging>
     <parent>

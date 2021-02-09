@@ -68,14 +68,14 @@ public class GoodService {
         List<String> categoriesNameList= categoryClient.queryCategoryList(
                 Arrays.asList(spu.getCid1(),spu.getCid2(),spu.getCid3()))
                 .stream().map(category -> { return  category.getName();
-        }).collect(Collectors.toList());
+                }).collect(Collectors.toList());
         //填充价格
         List<Long> priceList = new ArrayList<>();
         //填充sku : 需要什么数据就填充什么数据 id title 图片一张 价格[]
         List<Sku> skuList= goodClient.querySkuList(spuId);
         skuList= skuList.stream().map(sku -> {
-           //Sku sku1 = new Sku();
-           //图片只取一张
+            //Sku sku1 = new Sku();
+            //图片只取一张
             sku. setCreateTime(null);
             sku. setSpuId(null);
             sku. setLastUpdateTime(null);
@@ -85,7 +85,7 @@ public class GoodService {
             sku. setIndexes(null);
             sku. setOwnSpec(null);
             sku.setImages(StringUtils.isNotEmpty(sku.getImages())?sku.getImages().split(",")[0]:"");
-           //填充价格
+            //填充价格
             priceList.add(sku.getPrice());
             return sku;
         }).collect(Collectors.toList());
@@ -97,28 +97,28 @@ public class GoodService {
         //把特有规格变成对象  spuDetail.getSpecialSpec();
         Map<Long,List<String>> specialMap=
                 JsonUtils.nativeRead(spuDetail.getSpecialSpec(),
-                new TypeReference<Map<Long, List<String>>>() {
-                }) ;
+                        new TypeReference<Map<Long, List<String>>>() {
+                        }) ;
 
         Map<String,Object> specMap = new HashMap<>();
         //填充可被搜素的规格属性,值{运行内存,屏幕尺寸,频率...} generic  searching:是否被检索
-      List<SpecParam> specParamList=  specClient.params(spu.getCid3(),true);
+        List<SpecParam> specParamList=  specClient.querySpecParam(null,spu.getCid3(),true,null);
 
-      specParamList.forEach(specParam -> {
-          //specParam.getId(): 取商品的规格值,需要根据id 从detail表去get获取
-          Object value=null;//扩大作用域
-        if (specParam.getGeneric()){//判断是否是通用规格
-             value= genSpecMap.get(specParam.getId()); //通用
-            //判断规格的值 是否是数字类型
-            if(specParam.getNumeric()){
-                //把文本变成区间
-                value = this.chooseSegment(value.toString(),specParam);
+        specParamList.forEach(specParam -> {
+            //specParam.getId(): 取商品的规格值,需要根据id 从detail表去get获取
+            Object value=null;//扩大作用域
+            if (specParam.getGeneric()){//判断是否是通用规格
+                value= genSpecMap.get(specParam.getId()); //通用
+                //判断规格的值 是否是数字类型
+                if(specParam.getNumeric()){
+                    //把文本变成区间
+                    value = this.chooseSegment(value.toString(),specParam);
+                }
+            }else{
+                value= specialMap.get(specParam.getId()); //特有
             }
-        }else{
-            value= specialMap.get(specParam.getId()); //特有
-        }
-          specMap.put(specParam.getName(),value);
-      });
+            specMap.put(specParam.getName(),value);
+        });
         goods.setId(spu.getId());
         goods.setAll(spu.getTitle()+","+brand.getName()+","+ StringUtils.join(categoriesNameList,","));
         goods.setBrandId(spu.getBrandId());
@@ -131,7 +131,7 @@ public class GoodService {
         goods.setSkus(JsonUtils.serialize(skuList));
         goods.setSpecs(specMap);//填充规格
 
-       return goods;
+        return goods;
     }
 
     /**
@@ -143,7 +143,7 @@ public class GoodService {
 //执行查询
         //构造查询条件
         NativeSearchQueryBuilder builder = new NativeSearchQueryBuilder();
-       //==================================查询商品======================================
+        //==================================查询商品======================================
         if(StringUtils.isNotEmpty(searchBo.getKey())){//判断查询条件是否为空
             builder.withQuery(
                     QueryBuilders.matchQuery("all",searchBo.getKey())
@@ -151,33 +151,33 @@ public class GoodService {
         }
         //判断是否有过滤条件
         Map<String,String> filterMap = searchBo.getFilter();
-       if( filterMap!=null &&  filterMap.size()!=0){
+        if( filterMap!=null &&  filterMap.size()!=0){
 
-           //拼接过滤条件,循环map
-           Set<String> filterKey= filterMap.keySet();
-           //创建boll查询 ,方便循环内拼接
-           BoolQueryBuilder boolQueryBuilder =QueryBuilders.boolQuery();
-           //循环所有的sku
+            //拼接过滤条件,循环map
+            Set<String> filterKey= filterMap.keySet();
+            //创建boll查询 ,方便循环内拼接
+            BoolQueryBuilder boolQueryBuilder =QueryBuilders.boolQuery();
+            //循环所有的sku
 
-           filterKey.forEach(key->{
-               //增加过滤条件 key? cpu cid3 ....  value? 小龙 76...
-               if(key.equals("cid3") || key.equals("brandId")){
-                   boolQueryBuilder.must(QueryBuilders.termQuery(key,filterMap.get(key)));
-               }else{
-                   boolQueryBuilder.must(QueryBuilders.termQuery("specs."+key+".keyword",filterMap.get(key)));
-               }
-           });
-           builder.withFilter(boolQueryBuilder);
-       }
+            filterKey.forEach(key->{
+                //增加过滤条件 key? cpu cid3 ....  value? 小龙 76...
+                if(key.equals("cid3") || key.equals("brandId")){
+                    boolQueryBuilder.must(QueryBuilders.termQuery(key,filterMap.get(key)));
+                }else{
+                    boolQueryBuilder.must(QueryBuilders.termQuery("specs."+key+".keyword",filterMap.get(key)));
+                }
+            });
+            builder.withFilter(boolQueryBuilder);
+        }
         //设置分页
         builder.withPageable(PageRequest.of(searchBo.getPage(),searchBo.getSize()));
         //查询
-       Page<Goods> goodsPage= goodRepository.search(builder.build());
-       //设置高亮关键字
+        Page<Goods> goodsPage= goodRepository.search(builder.build());
+        //设置高亮关键字
         builder.withHighlightFields(new HighlightBuilder.Field("all")
                 .preTags("<font color='red'>")
                 .postTags("</font>"));
-       Map<Long,String> hignMap= HighLightUtil.getHignLigntMap(elasticsearchTemplate,builder.build(),Goods.class,"all");
+        Map<Long,String> hignMap= HighLightUtil.getHignLigntMap(elasticsearchTemplate,builder.build(),Goods.class,"all");
         goodsPage.getContent().forEach(goods -> {
             //高亮字段替换
             goods.setAll(hignMap.get(goods.getId()));
@@ -215,13 +215,13 @@ public class GoodService {
        /* brandBucket.forEach(bucket -> {
             System.out.println("聚合后的品牌数据"+bucket.getKeyAsNumber().longValue());
         });*/
-       //根据id查询品牌数据
+        //根据id查询品牌数据
         //的到品牌集合
-       List<Brand> brandList= brandBucket.stream().map(bucket -> {
-          return  brandClient.queryBidById(bucket.getKeyAsNumber().longValue());
+        List<Brand> brandList= brandBucket.stream().map(bucket -> {
+            return  brandClient.queryBidById(bucket.getKeyAsNumber().longValue());
         }).collect(Collectors.toList());
 
-       //汇总出热度最高的分类
+        //汇总出热度最高的分类
         long maxDoc = 0;
         long maxCid = 0;
 
@@ -251,7 +251,7 @@ public class GoodService {
         pageResult.setCategoryList(categoryList);
         //设置规格查询条件
         pageResult.setSpecMapList(specMapList);
-       return pageResult;
+        return pageResult;
     }
 
     /**
@@ -264,7 +264,7 @@ public class GoodService {
         List<Map<String, Object>> specMapList= new ArrayList<>();
 
         //1查询规格名称
-        List<SpecParam> specParamList=specClient.params(maxCid,true);
+        List<SpecParam> specParamList=specClient.querySpecParam(null,maxCid,true,null);
         //从es 查询规格的值
         NativeSearchQueryBuilder builder = new NativeSearchQueryBuilder();
 
@@ -289,7 +289,7 @@ public class GoodService {
                 }
             });
             //聚合会在过滤之后执行吗?
-          //  builder.withFilter(boolQueryBuilder);
+            //  builder.withFilter(boolQueryBuilder);
         }
         //设置关键字
         if(StringUtils.isNotEmpty(searchBo.getKey())){
@@ -309,7 +309,7 @@ public class GoodService {
         specParamList.forEach(specParam -> {
             //组装map放入集合
             String key = specParam.getName();
-         //规格名称作为key
+            //规格名称作为key
             Map<String,Object> map=new HashMap<>();
             map.put("key",key);
             //聚合出的值作为value
@@ -318,11 +318,11 @@ public class GoodService {
             //取出数据
             List<StringTerms.Bucket> bucketList = stringTerms.getBuckets();
             //转为 集合string类型
-           List<String> values= bucketList.stream().map(bucket -> {
+            List<String> values= bucketList.stream().map(bucket -> {
                 return bucket.getKeyAsString();
             }).collect(Collectors.toList());
-           map.put("values",values);
-           //将map放入集合
+            map.put("values",values);
+            //将map放入集合
             specMapList.add(map);
         });
         return  specMapList;
@@ -355,4 +355,14 @@ public class GoodService {
         return result;
     }
 
+    /**
+     * 新增商品到es库
+     * @param valueOf
+     */
+    public void saveGood(Long spuId) {
+      //查询数据
+        Goods goods=  this.getGoodsBySpuId(spuId);
+       //保存数据
+        goodRepository.save(goods);
+    }
 }

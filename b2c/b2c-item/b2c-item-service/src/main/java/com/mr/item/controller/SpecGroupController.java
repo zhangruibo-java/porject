@@ -5,6 +5,7 @@ import com.mr.item.service.SpecGroupService;
 import com.mr.pojo.SpecGroup;
 import com.mr.pojo.SpecParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,13 +41,14 @@ public class SpecGroupController {
         return ResponseEntity.ok(null);
     }
 
-    @GetMapping("/params")
+
+   /* @GetMapping("/params")
     public ResponseEntity<List<SpecParam>> params(
             @RequestParam("cid") Long cid,
             @RequestParam("searching") boolean searching){
         List<SpecParam> list = specGroupService.querySpecBygid(cid,searching);
         return ResponseEntity.ok(list);
-    }
+    }*/
 
     @PostMapping("/param")
     public ResponseEntity<Void> addParam(@RequestBody SpecParam specParam){
@@ -66,16 +68,25 @@ public class SpecGroupController {
         return ResponseEntity.ok(null);
     }
 
-//    @GetMapping("/params")
-//    public ResponseEntity<List<SpecParam>> querySpecByParamCid(@RequestParam("cid") Long cid){
-//        List<SpecParam> list = specGroupService.querySpecByParamCid(cid);
-//        return ResponseEntity.ok(list);
-//    }
-
+    @GetMapping("/params")
+    public ResponseEntity<List<SpecParam>> querySpecParamByCid(
+            @RequestParam(value = "gid",required = false) Long gid,
+            @RequestParam(value = "cid",required = false) Long cid,
+            @RequestParam(value = "searching",required = false) Boolean searching,
+            @RequestParam(value = "generic",required = false) Boolean generic){
+        List<SpecParam> list =
+                this.specGroupService.querySpecParams(gid,cid,searching,generic);
+        if(list == null || list.size() == 0){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(list);
+    }
     @GetMapping("query")
-    public ResponseEntity<List<SpecParam>> querySpecByParamCid(@RequestParam("cid") Long cid){
+    public ResponseEntity<List<SpecParam>> querySpecByParamCid(
+            @RequestParam("cid") Long cid){
         List<SpecParam> list = specGroupService.querySpecByParamCid(cid);
         return ResponseEntity.ok(list);
     }
+
 }
 

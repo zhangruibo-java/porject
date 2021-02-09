@@ -21,9 +21,9 @@ public interface SpecGroupMapper extends tk.mybatis.mapper.common.Mapper<SpecPar
 
     @Delete("delete from tb_spec_group where id=#{gid}")
     void deleteGroup(Long gid);
-
-//    @Select("select * from tb_spec_param where group_id=#{cid}")
-//    List<SpecParam> querySpecBygid(Long cid);
+/*
+    @Select("select * from tb_spec_param where group_id=#{cid}")
+    List<SpecParam> querySpecByParamCid(Long cid);*/
 
     @Insert("insert into tb_spec_param values(null,#{cid},#{groupId},#{name},#{numeric},#{unit},#{generic},#{searching},#{segments})")
     void addParam(SpecParam specParam);

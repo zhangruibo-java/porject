@@ -47,8 +47,9 @@ public class GoodsController {
     }
     @PostMapping("addGoods")
     public ResponseEntity<Void> addGoods(@RequestBody SpuBo spuBo){
-
-            goodsService.addGoods(spuBo);
+            //执行新增，新增完成之后发消息
+        Long spuId=   goodsService.addGoods(spuBo);
+           goodsService.sendSaveMessage(spuId);
             return ResponseEntity.ok(null);
         }
 

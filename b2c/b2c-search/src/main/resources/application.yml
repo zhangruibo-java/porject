@@ -6,7 +6,13 @@ spring:
   data:
     elasticsearch:
       cluster-name: elasticsearch
-      cluster-nodes: 192.168.75.128:9300
+      cluster-nodes: 121.5.138.32:9300 # 192.168.75.128:9300
+  rabbitmq:
+    host: 119.45.186.254
+    username: zrb
+    password: zrb
+    virtual-host: zrb
+
 eureka:
   client:
     service-url:

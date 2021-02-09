@@ -145,7 +145,8 @@ public final class CookieUtils {
 			if (cookieMaxage > 0)
 				cookie.setMaxAge(cookieMaxage);
 			if (null != request)// 设置域名的cookie
-				cookie.setDomain(getDomainName(request));
+			//	cookie.setDomain(getDomainName(request));
+			cookie.setDomain("b2c.com");
 			cookie.setPath("/");
 			response.addCookie(cookie);
 		} catch (Exception e) {
@@ -171,6 +172,7 @@ public final class CookieUtils {
 				cookie.setMaxAge(cookieMaxage);
 			if (null != request)// 设置域名的cookie
 				cookie.setDomain(getDomainName(request));
+			//cookie.setDomain("b2c.com");
 			cookie.setPath("/");
 			response.addCookie(cookie);
 		} catch (Exception e) {
