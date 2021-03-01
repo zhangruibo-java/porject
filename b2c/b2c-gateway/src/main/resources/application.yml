@@ -17,9 +17,11 @@ zuul:
   retryable: true
   routes:
     item-service: /item/** # 将商品微服务映射到/item/** upload-service
-    search-service: /search/**
-    user-service: /user/**
-    auth-service: /auth/**
+    search-service: /search/**  # 路由到搜索
+    user-service: /user/**  # 路由到用户中心
+    auth-service: /auth/**  # 路由到认证服务
+    cart-service: /cart/**  # 转发到路由到购物者服务
+    order-service: /order/**  #转发路由到订单服务
   ignored-services: upload-service #忽略服务
   ignored-patterns: /upload/** #忽略路径
   add-host-header: true #添加host域信息 到头信息内
@@ -40,3 +42,16 @@ hystrix:
         isolation:
           thread:
             timeoutInMillisecond: 10000 # 熔断超时时长：10000ms
+b2c:
+  jwt:
+    pubKeyPath: C:\Users\mac\JavaFile\zrb-source\resKey\rea.pub # 公钥地址
+    cookieName: B2C_TOKEN
+  filter:
+    allowPaths:
+      - /api/auth
+      - /api/search
+      - /api/user/register
+      - /api/user/check
+      - /api/user/code
+      - /api/item
+  # C:\Users\mac\JavaFile\zrb-source\resKey\rea.pub # 公钥地址

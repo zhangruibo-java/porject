@@ -18,6 +18,8 @@
         <module>b2c-good-page</module>
         <module>b2c-user</module>
         <module>b2c-auth</module>
+        <module>b2c-cart</module>
+        <module>b2c-order</module>
     </modules>
     <packaging>pom</packaging>
     <parent>

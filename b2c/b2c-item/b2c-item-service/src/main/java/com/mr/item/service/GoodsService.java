@@ -236,6 +236,25 @@ public class GoodsService {
         return goodsMapper.selectByPrimaryKey(spuId);
     }
 
+    public Sku queryCartBySkuId(Long skuId) {
+        //查询sku 根据id查询
+        Sku sku=   skuMapper.selectByPrimaryKey(skuId);
+       //填充库存
+        Stock stock= stockMapper.selectByPrimaryKey(skuId);
+        sku.setStock(stock.getStock());
+   return sku;
+    }
+
+
+    public Boolean updateStock(Stock stock) {
+        //接受skuid喝要修改的库存量
+        //不能覆盖
+        //先查出sku对象 再修改
+        //update stock set stock=stock-5 where skuId={skuId} and stock > num
+        return stockMapper.updateStock(stock)==1;
+
+    }
+
    /* public List<Spu> querySpuByPage(String key, Integer page, Integer rows, String sale) {
         Integer page1 = (page - 1) * rows;
         if (StringUtils.isNotEmpty(key)) {

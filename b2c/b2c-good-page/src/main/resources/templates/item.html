@@ -207,16 +207,25 @@
                             <div class="fl title">
                                 <div class="control-group">
                                     <div class="controls">
-                                        <input autocomplete="off" type="text" disabled value="1" minnum="1" class="itxt" />
-                                        <a href="javascript:void(0)" class="increment plus">+</a>
-                                        <a href="javascript:void(0)" class="increment mins">-</a>
+                                        <input autocomplete="off" type="text"
+                                               disabled
+
+                                               v-model="num"
+                                               minnum="1"
+                                               class="itxt" />
+                                        <a href="javascript:void(0)" class="increment plus" @click="increment">+</a>
+                                        <a href="javascript:void(0)" class="increment mins" @click="decrement">-</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="fl">
                                 <ul class="btn-choose unstyled">
                                     <li>
-                                        <a href="success-cart.html" target="_blank" class="sui-btn  btn-danger addshopcar">加入购物车</a>
+                                        <a href="success-cart.html"
+                                           @click.prevent="addCart"
+                                           target="_blank"
+                                           class="sui-btn
+                                           btn-danger addshopcar">加入购物车</a>
                                     </li>
                                 </ul>
                             </div>
@@ -660,8 +669,10 @@
             specialSpec,//spu下特有规格的值
             indexes,//选中规格下表
             genericSpec,//通用规格参数
-            specGroupList//规格组：包含了组内详细的规格参数
-        },
+            specGroupList,//规格组：包含了组内详细的规格参数
+            num:1//商品购买数量
+        }
+        ,
         computed:{//计算属性
             sku(){//页面当前展示的 具体 sku
                 // 获取选中的规格下标index;
@@ -695,6 +706,39 @@
             images(){
                 //图片展示，需要从当前页面展示的sku中分割得到
                 return this.sku.images ? this.sku.images.split(",") : [];
+            }
+        }
+        ,
+        methods:{
+            addCart(){//写方法
+                console.log("加入购物车");
+                //判断用户是否登录
+                b2c.http.get("/auth/verify")
+                    .then(resp => {
+                        console.log("以登录")
+                    b2c.http.post("cart/addCart",{skuId:this.sku.id,num:this.num})
+                        .then(resp => {
+                            //增加购物车成功 跳转到购物车页面
+                            window.location.href="http://www.b2c.com/cart.html";
+                    })
+                        .catch(resp =>{
+                            console.log("联系管理")
+                })
+                })
+                .catch(resp=>{
+                    console.log("未登录");
+                    window.location.href="http://www.b2c.com/login.html";
+                })
+            },
+            increment(){//增加购买数量 不能大于库存
+            if(this.num < this.sku.stock){
+                this.num++
+                 }
+            },
+            decrement(){//减少购买数量 不能小于1
+            if (this.num > 1){
+                this.num--
+            }
             }
         },
         components:{

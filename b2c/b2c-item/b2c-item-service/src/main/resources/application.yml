@@ -38,3 +38,10 @@ eureka:
     prefer-ip-address: true
     ip-address: 127.0.0.1
     instance-id: ${spring.application.name}:${server.port}
+b2c:
+  worker:
+    workerId: 1
+    datacenterId: 1
+  jwt:
+    secret: 9527 # 登录校验的密钥
+    pubKeyPath: C:\Users\mac\JavaFile\zrb-source\resKey\rea.pub # 公钥地址

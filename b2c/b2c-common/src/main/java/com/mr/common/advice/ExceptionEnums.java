@@ -9,11 +9,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public enum ExceptionEnums {
-
+    SKU_STOCK_DE_ERROR(500,"库存不足"),
     PRICE_IS_NULL(400,"价格不能为空"),
     CATEGORY_LIST_NOT_FOUNT(401,"参数设置错误"),
 
     MYSQL_COGNITION_ERROR(500,"mysql连接不上");
+
+
+
 
     private Integer code;
 

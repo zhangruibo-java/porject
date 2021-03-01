@@ -2,36 +2,45 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="b2c-good-page" />
-        <module name="b2c-user-interface" />
+        <module name="b2c-gateway" />
+        <module name="b2c-registry" />
+        <module name="b2c-order" />
+        <module name="b2c-cart" />
+        <module name="b2c-auth-service" />
         <module name="b2c-auth-common" />
         <module name="b2c-user-service" />
-        <module name="b2c-search" />
-        <module name="b2c-auth-service" />
         <module name="b2c-upload" />
-        <module name="b2c-item-service" />
-        <module name="b2c-registry" />
-        <module name="b2c-item-interface" />
+        <module name="b2c-search" />
         <module name="b2c-common" />
-        <module name="b2c-gateway" />
+        <module name="b2c-item-interface" />
+        <module name="b2c-good-page" />
+        <module name="b2c-user-interface" />
+        <module name="b2c-item-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="b2c-order1" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="b2c" options="-parameters" />
       <module name="b2c-auth-common" options="-parameters" />
       <module name="b2c-auth-service" options="-parameters" />
+      <module name="b2c-cart" options="-parameters" />
       <module name="b2c-common" options="-parameters" />
       <module name="b2c-gateway" options="-parameters" />
       <module name="b2c-good-page" options="-parameters" />
       <module name="b2c-item" options="-parameters" />
       <module name="b2c-item-interface" options="-parameters" />
       <module name="b2c-item-service" options="-parameters" />
+      <module name="b2c-order" options="-parameters" />
+      <module name="b2c-order1" options="-parameters" />
       <module name="b2c-registry" options="-parameters" />
       <module name="b2c-search" options="-parameters" />
       <module name="b2c-upload" options="-parameters" />

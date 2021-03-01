@@ -4,10 +4,7 @@ import com.mr.bo.SpuBo;
 import com.mr.common.utils.PageResult;
 import com.mr.item.service.BrandService;
 import com.mr.item.service.GoodsService;
-import com.mr.pojo.Brand;
-import com.mr.pojo.Sku;
-import com.mr.pojo.Spu;
-import com.mr.pojo.SpuDetail;
+import com.mr.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -79,6 +76,29 @@ public class GoodsController {
     public ResponseEntity<Spu> querySpuBySpuId(@PathVariable("spuId") Long spuId){
         Spu spu = goodsService.querySpuBySpuId(spuId);
         return ResponseEntity.ok(spu);
+    }
+
+    /**
+     * 根据skuid查询sku
+     * @param spuId
+     * @return
+     */
+    @GetMapping("sku/{skuId}")
+    public ResponseEntity<Sku> queryCartBySkuId(@PathVariable("skuId") Long spuId){
+        Sku sku = goodsService.queryCartBySkuId(spuId);
+        return ResponseEntity.ok(sku);
+    }
+
+    /**
+     *修改库存
+     * @param stock
+     * @return
+     */
+    @PutMapping("updateStock")
+    public ResponseEntity<Boolean> updateStock(@RequestBody Stock stock){
+        //修改库存方法，必须给返回值 起码要提示 true or false
+        Boolean  falg=  goodsService.updateStock(stock);
+        return ResponseEntity.ok(falg);
     }
 }
 
